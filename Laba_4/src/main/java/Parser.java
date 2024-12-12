@@ -1,5 +1,5 @@
 import au.com.bytecode.opencsv.CSVReader;
-import ru.vsu.beans.Person;
+import beans.Person;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -29,6 +29,20 @@ public class Parser {
         }
     }
 
-
-    
+    private static int getDepartmentID(String name, List<Person> list) {
+        int id = -1, maxId = -1;
+        for (Person i : list) {
+            if (i.getDepartment().getName().compareTo(name) == 0) {
+                id = i.getDepartment().getID();
+                break;
+            }
+            if (i.getDepartment().getID() > maxId) {
+                maxId = i.getDepartment().getID();
+            }
+        }
+        if (id == -1) {
+            return maxId + 1;
+        }
+        return id;
+    }
 }
